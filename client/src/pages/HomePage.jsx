@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router";
-import { fetchUser } from "../store/userSlice";
 import { generatePaymentToken, clearError } from "../store/paymentSlice";
 import { toast } from "react-toastify";
 import "../HomePage.css";
@@ -10,10 +9,6 @@ export default function HomePage() {
   const dispatch = useDispatch();
   const { isMembership, loading: userLoading } = useSelector((state) => state.user);
   const { loading: paymentLoading, error: paymentError } = useSelector((state) => state.payment);
-
-  useEffect(() => {
-    dispatch(fetchUser());
-  }, [dispatch]);
 
   useEffect(() => {
     if (paymentError) {
@@ -51,7 +46,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="home-hero min-vh-100 d-flex flex-column align-items-center">
+    <div className="home-hero d-flex flex-column align-items-center" style={{ minHeight: "calc(100vh - 200px)" }}>
       <img src="/logo-icon.png" style={{ maxWidth: "200px", height: "auto" }} alt="" />
       <div className="container py-5 pt-0">
         <div className="home-overlay rounded-4 p-4 p-md-5">
@@ -138,20 +133,6 @@ export default function HomePage() {
         </div>
         <div className="mt-5 mb-5"></div>
       </div>
-      <footer
-        className="text-center text-secondary py-3 mb-3"
-        style={{  left: 0, right: 0, bottom: 0 }}
-      >
-        <p className="mb-1">
-          Powered by GeminiAI{" "}
-          <img
-            src="/gemini.png"
-            alt="Gemini Logo"
-            style={{ maxWidth: "20px", verticalAlign: "middle" }}
-          />
-        </p>
-        <small className="text-secondary">This website is developed by Medd.</small>
-      </footer>
     </div>
   );
 }

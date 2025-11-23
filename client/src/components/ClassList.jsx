@@ -9,7 +9,8 @@ import "../ClassList.css";
 export default function ClassList({ classItem }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { bookingLoading, bookingSuccess, error } = useSelector((state) => state.classes);
+  const { loadingClassId, bookingSuccess, error } = useSelector((state) => state.classes);
+  const isLoading = loadingClassId === classItem.id;
 
   useEffect(() => {
     if (bookingSuccess) {
@@ -91,14 +92,14 @@ export default function ClassList({ classItem }) {
             <button
               onClick={handleJoin}
               className="btn btn-danger fw-semibold px-3 py-1 join-btn"
-              disabled={bookingLoading || isFull}
+              disabled={isLoading || isFull}
               style={{ 
                 position: 'relative', 
                 zIndex: 10,
                 pointerEvents: 'auto'
               }}
             >
-              {bookingLoading ? (
+              {isLoading ? (
                 <>
                   <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
                   Joining...

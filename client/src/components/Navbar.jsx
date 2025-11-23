@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
-import { useNavigate, Link, useLocation } from "react-router";
+import { useNavigate, Link } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser, logout } from "../store/userSlice";
 
 export default function Navbar() {
   const navigate = useNavigate();
-  const location = useLocation();
   const dispatch = useDispatch();
   const { isMembership, loading } = useSelector((state) => state.user);
 
@@ -25,12 +24,6 @@ export default function Navbar() {
       window.removeEventListener("membershipUpdated", handleMembershipUpdate);
     };
   }, [dispatch]);
-
-  // Re-fetch user data when route changes
-  useEffect(() => {
-    console.log("Route changed, refetching user data");
-    dispatch(fetchUser());
-  }, [location.pathname, dispatch]);
 
   const handleLogout = (event) => {
     event.preventDefault();

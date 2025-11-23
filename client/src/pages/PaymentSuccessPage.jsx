@@ -125,11 +125,12 @@ export default function PaymentSuccessPage() {
 
   return (
     <div
-      className="min-vh-100 d-flex align-items-center justify-content-center"
+      className="d-flex align-items-center justify-content-center py-5"
       style={{
         backgroundColor: "#0b0b0b",
         backgroundImage:
           "radial-gradient(circle at 20% 50%, rgba(229, 9, 20, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(229, 9, 20, 0.08) 0%, transparent 50%)",
+        minHeight: "60vh",
       }}
     >
       <div className="container">

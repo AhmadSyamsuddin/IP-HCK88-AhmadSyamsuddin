@@ -35,7 +35,7 @@ const classesSlice = createSlice({
   initialState: {
     items: [],
     loading: false,
-    bookingLoading: false,
+    loadingClassId: null,
     error: null,
     bookingSuccess: false,
   },
@@ -62,13 +62,13 @@ const classesSlice = createSlice({
         s.loading = false;
         s.error = a.payload;
       })
-      .addCase(bookClass.pending, (s) => {
-        s.bookingLoading = true;
+      .addCase(bookClass.pending, (s, a) => {
+        s.loadingClassId = a.meta.arg;
         s.error = null;
         s.bookingSuccess = false;
       })
       .addCase(bookClass.fulfilled, (s, a) => {
-        s.bookingLoading = false;
+        s.loadingClassId = null;
         s.bookingSuccess = true;
         // Update currentQuota locally
         const classIndex = s.items.findIndex(c => c.id === a.payload.classId);
@@ -77,7 +77,7 @@ const classesSlice = createSlice({
         }
       })
       .addCase(bookClass.rejected, (s, a) => {
-        s.bookingLoading = false;
+        s.loadingClassId = null;
         s.error = a.payload;
         s.bookingSuccess = false;
       });

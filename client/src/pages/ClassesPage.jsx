@@ -12,8 +12,21 @@ export default function ClassesPage() {
     dispatch(fetchClasses());
   }, [dispatch]);
 
+  if (loading) {
+    return (
+      <div className="bg-black d-flex align-items-center justify-content-center" style={{ minHeight: "70vh" }}>
+        <div className="text-center">
+          <div className="spinner-border text-light mb-3" role="status" style={{ width: "3rem", height: "3rem" }}>
+            <span className="visually-hidden">Loading...</span>
+          </div>
+          <p className="text-secondary">Loading classes…</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="bg-black min-vh-100 py-5">
+    <div className="bg-black py-5">
       <div className="container" style={{ maxWidth: 1200 }}>
         {/* Header + Page Nav */}
         <div className="d-flex flex-column flex-md-row align-items-center justify-content-between mb-4">
@@ -60,26 +73,19 @@ export default function ClassesPage() {
         )}
 
         {/* List */}
-        {loading ? (
-          <div className="text-center text-secondary py-5">
-            <div className="spinner-border text-light mb-3" role="status" />
-            <div>Loading classes…</div>
-          </div>
-        ) : (
-          <div className="row g-4">
-            {classes.length ? (
-              classes.map((classItem) => (
-                <div key={classItem.id} className="col-12 col-md-6 col-lg-4">
-                  <ClassList classItem={classItem} />
-                </div>
-              ))
-            ) : (
-              <div className="text-center text-secondary py-5 w-100">
-                No classes found.
+        <div className="row g-4">
+          {classes.length ? (
+            classes.map((classItem) => (
+              <div key={classItem.id} className="col-12 col-md-6 col-lg-4">
+                <ClassList classItem={classItem} />
               </div>
-            )}
-          </div>
-        )}
+            ))
+          ) : (
+            <div className="text-center text-secondary py-5 w-100">
+              No classes found.
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

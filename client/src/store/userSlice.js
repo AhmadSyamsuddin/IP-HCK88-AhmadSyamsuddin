@@ -92,7 +92,10 @@ const userSlice = createSlice({
         s.error = a.payload;
       })
       .addCase(fetchUser.pending, (s) => {
-        s.loading = true;
+        // Only show loading on initial load (when no user data exists)
+        if (!s.user) {
+          s.loading = true;
+        }
         s.error = null;
       })
       .addCase(fetchUser.fulfilled, (s, a) => {

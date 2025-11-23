@@ -27,6 +27,7 @@ export default function LoginPage() {
         window.google.accounts.id.renderButton(btn, {
           theme: "filled_black",
           size: "large",
+          width: btn.offsetWidth, // Use parent width
         });
       }
     }
@@ -88,8 +89,22 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="bg-black min-vh-100 d-flex align-items-center justify-content-center">
-      <div className="container" style={{ maxWidth: 1100 }}>
+    <>
+      <style>
+        {`
+          #googleSignInButton iframe {
+            width: 100% !important;
+          }
+          #googleSignInButton > div {
+            width: 100% !important;
+          }
+          #googleSignInButton > div > div {
+            width: 100% !important;
+          }
+        `}
+      </style>
+      <div className="bg-black min-vh-100 d-flex align-items-center justify-content-center">
+        <div className="container" style={{ maxWidth: 1100 }}>
         <div
           className="row g-0 rounded-4 overflow-hidden shadow"
           style={{ backgroundColor: "#0b0b0b", border: "1px solid #1f1f1f" }}
@@ -146,7 +161,7 @@ export default function LoginPage() {
                 <div className="flex-grow-1 border-top border-secondary"></div>
               </div>
 
-              <div id="googleSignInButton" className="w-100 d-grid mb-2" />
+              <div id="googleSignInButton" className="w-100 mb-2" style={{ display: 'block' }} />
 
               <div className="d-flex justify-content-between align-items-center mt-3">
                 <p className="mb-0 text-secondary">
@@ -185,5 +200,6 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

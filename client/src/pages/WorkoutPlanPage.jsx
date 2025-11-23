@@ -38,7 +38,7 @@ export default function WorkoutPlanPage() {
 
   if (loading) {
     return (
-      <div className="bg-black min-vh-100 d-flex align-items-center justify-content-center">
+      <div className="bg-black d-flex align-items-center justify-content-center" style={{ minHeight: "60vh" }}>
         <div className="text-center">
           <div className="spinner-border text-light mb-3" role="status" style={{ width: "3rem", height: "3rem" }} />
           <h4 className="text-white">Generating your personalized workout plan...</h4>
@@ -50,7 +50,7 @@ export default function WorkoutPlanPage() {
 
   if (error) {
     return (
-      <div className="bg-black min-vh-100 d-flex align-items-center justify-content-center">
+      <div className="bg-black d-flex align-items-center justify-content-center" style={{ minHeight: "60vh" }}>
         <div className="text-center">
           <div className="text-danger mb-3" style={{ fontSize: "3rem" }}>⚠️</div>
           <h4 className="text-white mb-3">Oops! Something went wrong</h4>
@@ -67,7 +67,7 @@ export default function WorkoutPlanPage() {
   }
 
   return (
-    <div className="bg-black min-vh-100">
+    <div className="bg-black">
       <div className="container py-5" style={{ maxWidth: 1200 }}>
         <div className="mb-4">
           <Link

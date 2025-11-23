@@ -34,7 +34,7 @@ const userClassesSlice = createSlice({
   initialState: {
     items: [],
     loading: false,
-    deleteLoading: false,
+    deletingClassId: null,
     error: null,
     deleteSuccess: false,
   },
@@ -60,17 +60,17 @@ const userClassesSlice = createSlice({
         s.loading = false;
         s.error = a.payload;
       })
-      .addCase(deleteUserClass.pending, (s) => {
-        s.deleteLoading = true;
+      .addCase(deleteUserClass.pending, (s, a) => {
+        s.deletingClassId = a.meta.arg;
         s.error = null;
         s.deleteSuccess = false;
       })
       .addCase(deleteUserClass.fulfilled, (s, a) => {
-        s.deleteLoading = false;
+        s.deletingClassId = null;
         s.deleteSuccess = true;
       })
       .addCase(deleteUserClass.rejected, (s, a) => {
-        s.deleteLoading = false;
+        s.deletingClassId = null;
         s.error = a.payload;
       });
   },
